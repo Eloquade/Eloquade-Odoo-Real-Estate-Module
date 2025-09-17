@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_real_estate_form" model="ir.ui.view">
+        <field name="name">real.estate.form</field>
+        <field name="model">real.estate</field>
+        <field name="priority" eval="16"/>
+        <field name="arch" type="xml">
+            <form string="Real Estate">
+                <sheet>
+                    <notebook>
+                        <!-- General Info -->
+                        <page string="General Information">
+                            <group>
+                                <field name="name" string="Property Name"/>
+                                <field name="property_type" string="Property Type"/>
+                                <field name="price" string="Price"/>
+                                <field name="state" string="Status"/>
+                            </group>
+                        </page>
+
+                        <!-- Description -->
+                        <page string="Description">
+                            <group>
+                                <field name="description" placeholder="Enter property description..."/>
+                            </group>
+                        </page>
+
+                        <!-- Location -->
+                        <page string="Location">
+                            <group>
+                                <field name="address" string="Street Address"/>
+                                <field name="city" string="City"/>
+                                <field name="zip" string="ZIP Code"/>
+                            </group>
+                        </page>
+
+                        <!-- Images -->
+                        <page string="Images">
+                            <field name="image_ids" widget="many2many_binary" options="{'preview_image_field': 'image_1920'}"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>
