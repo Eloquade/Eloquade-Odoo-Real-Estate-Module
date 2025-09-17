@@ -19,3 +19,5 @@ class RealEstate(models.Model):
         ('sold', 'Sold'),
         ('cancelled', 'Cancelled')
     ], string='Status', default='draft')
+    tag_ids = fields.Many2many('real.estate.tag', string='Tags')
+    property_type_id = fields.Many2one('real.estate.property.type', string='Property Type')

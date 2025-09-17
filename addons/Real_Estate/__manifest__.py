@@ -8,13 +8,13 @@
     'category': 'Real Estate',
     'depends': ['base'],
     'data': [
-        'views/real_estate_property_views.xml',
+        'views/real_estate_views.xml',
         'views/real_estate_property_type_views.xml',
         'views/real_estate_tag_views.xml',
         'security/ir.model.access.csv',
 
     ],
-    'images': ['static/description/icon.jpg'],
+    'images': ['static/description/icon.png'],
     'installable': True,
     'application': True,
     'license': 'LGPL-3',
