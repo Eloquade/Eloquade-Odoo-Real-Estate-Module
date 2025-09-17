@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- list View -->
+    <record id="view_real_estate_offer_list" model="ir.ui.view">
+        <field name="name">real.estate.offer.list</field>
+        <field name="model">real.estate.offer</field>
+        <field name="arch" type="xml">
+            <list string="Real Estate Offers">
+                <field name="property_id"/>
+                <field name="partner_id"/>
+                <field name="price"/>
+                <field name="status"/>
+                <field name="validity"/>
+                <field name="date_deadline"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_real_estate_offer_form" model="ir.ui.view">
+        <field name="name">real.estate.offer.form</field>
+        <field name="model">real.estate.offer</field>
+        <field name="arch" type="xml">
+            <form string="Real Estate Offer">
+                <sheet>
+                    <group>
+                        <field name="property_id"/>
+                        <field name="partner_id"/>
+                        <field name="price"/>
+                        <field name="status"/>
+                        <field name="validity"/>
+                        <field name="date_deadline"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_real_estate_offer" model="ir.actions.act_window">
+        <field name="name">Offers</field>
+        <field name="res_model">real.estate.offer</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- Menu Item -->
+    <menuitem id="menu_real_estate_offer"
+              name="Offers"
+              parent="menu_real_estate"
+              action="action_real_estate_offer"/>
+</odoo>

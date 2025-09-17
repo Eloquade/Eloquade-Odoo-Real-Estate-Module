@@ -15,6 +15,7 @@ class RealEstate(models.Model):
     area = fields.Float(string='Area (sqm)', compute='_compute_area', store=True)
     active = fields.Boolean(string='Active', default=True)
     date_available = fields.Date(string='Available From')
+    offer_ids = fields.One2many('real.estate.offer', 'property_id', string='Offers')
     state = fields.Selection([
         ('draft', 'Draft'),
         ('available', 'Available'),

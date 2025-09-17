@@ -9,6 +9,7 @@
     'depends': ['base'],
     'data': [
         'views/real_estate_views.xml',
+        'views/real_estate_offer_views.xml',
         'views/real_estate_property_type_views.xml',
         'views/real_estate_tag_views.xml',
         'security/ir.model.access.csv',
