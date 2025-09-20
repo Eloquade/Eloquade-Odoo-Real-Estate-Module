@@ -1,4 +1,5 @@
 from odoo import models, fields, api
+from odoo.exceptions import UserError
 from dateutil.relativedelta import relativedelta
 
 class RealEstateOffer(models.Model):
@@ -41,10 +42,13 @@ class RealEstateOffer(models.Model):
     def action_accept(self):
         self.ensure_one()
         if "accepted" in self.property_id.offer_ids.mapped('status'):
-            raise UserError(_("Another offer has already been accepted for this property."))
+            raise UserError("Another offer has already been accepted for this property.")
         self.status = 'accepted'
         self.property_id.state = 'sold'
         self.property_id.selling_price = self.price
+
+        other_offers = self.property_id.offer_ids - self
+        other_offers.write({'status': 'refused'})
 
     def action_refuse(self):
         self.ensure_one()
