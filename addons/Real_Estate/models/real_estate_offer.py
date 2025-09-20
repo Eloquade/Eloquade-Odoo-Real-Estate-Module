@@ -37,3 +37,15 @@ class RealEstateOffer(models.Model):
             if offer.date_deadline:
                 base = fields.Date.to_date(offer.create_date) if offer.create_date else fields.Date.today()
                 offer.validity = (offer.date_deadline - base).days
+
+    def action_accept(self):
+        self.ensure_one()
+        if "accepted" in self.property_id.offer_ids.mapped('status'):
+            raise UserError(_("Another offer has already been accepted for this property."))
+        self.status = 'accepted'
+        self.property_id.state = 'sold'
+        self.property_id.selling_price = self.price
+
+    def action_refuse(self):
+        self.ensure_one()
+        self.status = 'refused'
