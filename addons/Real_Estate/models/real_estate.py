@@ -3,6 +3,42 @@ from odoo import models, fields, api
 class RealEstate(models.Model):
     _name = 'real.estate'
     _description = 'Real Estate Property'
+    _sql_constraints = [
+    # 1. Unique property name (no two properties with the same name)
+    ('unique_property_name', 'unique(name)', 'The property name must be unique.'),
+
+    # 2. Price must be greater than 0
+    ('check_price_positive', 'CHECK(price > 0)', 'The price must be greater than zero.'),
+
+    # 3. Selling price must be positive if set
+    ('check_selling_price_positive', 'CHECK(selling_price >= 0)', 'The selling price must be zero or positive.'),
+
+    # 4. Living area must be positive
+    ('check_living_area_positive', 'CHECK(living_area >= 0)', 'The living area must be zero or positive.'),
+
+    # 5. Garden area must be positive
+    ('check_garden_area_positive', 'CHECK(garden_area >= 0)', 'The garden area must be zero or positive.'),
+
+    # 6. Bedrooms cannot be negative
+    ('check_bedrooms_non_negative', 'CHECK(bedrooms >= 0)', 'The number of bedrooms cannot be negative.'),
+
+    # 7. Bathrooms cannot be negative
+    ('check_bathrooms_non_negative', 'CHECK(bathrooms >= 0)', 'The number of bathrooms cannot be negative.'),
+
+    # 8. Available date must be in the future (or today)
+    ('check_available_date_future', "CHECK(date_available IS NULL OR date_available >= CURRENT_DATE)", 
+     'The available date must be today or in the future.'),
+
+    # 9. Selling price cannot be higher than listed price
+    ('check_selling_price_less_than_price', 
+     'CHECK(selling_price <= price)', 
+     'The selling price cannot be greater than the listed price.'),
+
+    # 10. Area consistency check (optional)
+    ('check_area_consistency',
+     'CHECK(area >= 0)',
+     'The total area must be zero or positive.')
+    ]
 
     name = fields.Char(string='Property Name', required=True)
     description = fields.Text(string='Description')
@@ -26,6 +62,8 @@ class RealEstate(models.Model):
     tag_ids = fields.Many2many('real.estate.tag', string='Tags')
     property_type_id = fields.Many2one('real.estate.property.type', string='Property Type')
 
+   
+
 
     @api.depends('living_area', 'garden_area')
     def _compute_area(self):
@@ -43,3 +81,9 @@ class RealEstate(models.Model):
                     'message': "The available date cannot be in the past. It has been reset to today.",
                 }
             }
+    
+    @api.constrains('area')
+    def _check_area(self):
+        for record in self:
+            if record.area < 10:
+                raise models.ValidationError("The total area must be at least 10 sqm.")
