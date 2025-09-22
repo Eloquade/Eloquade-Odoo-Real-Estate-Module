@@ -5,7 +5,12 @@
         <field name="model">real.estate</field>
         <field name="priority" eval="16"/>
         <field name="arch" type="xml">
-            <form string="Real Estate">
+            
+            <form string="Real Estate" widget="statusbar" statusbar_visible="draft,offer_received,sold,cancelled">
+                <header>
+                    <button string="Mark as Sold" type="object" name="action_mark_sold" />
+                    <button string="Mark as Cancelled" type="object" name="action_mark_cancelled"/>
+                </header>
                 <sheet>
                     <group>
                         <field name="name"/>

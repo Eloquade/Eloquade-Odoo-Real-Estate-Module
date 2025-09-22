@@ -1,4 +1,5 @@
 from odoo import models, fields, api
+from odoo.exceptions import ValidationError
 
 class RealEstate(models.Model):
     _name = 'real.estate'
@@ -87,3 +88,19 @@ class RealEstate(models.Model):
         for record in self:
             if record.area < 10:
                 raise models.ValidationError("The total area must be at least 10 sqm.")
+
+    def action_mark_sold(self):
+        for record in self:
+            if record.state != 'sold':
+                record.state = 'sold'
+                record.selling_price = record.price
+            else:
+                raise models.ValidationError("The property is already marked as sold.")
+    
+    def action_mark_cancelled(self):
+        for record in self:
+            if record.state != 'cancelled':
+                record.state = 'cancelled'
+            else:
+                raise models.ValidationError("The property is already marked as cancelled.")
+            
