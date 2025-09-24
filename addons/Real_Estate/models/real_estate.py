@@ -4,6 +4,7 @@ from odoo.exceptions import ValidationError
 class RealEstate(models.Model):
     _name = 'real.estate'
     _description = 'Real Estate Property'
+    _inherit = ['mail.thread', 'mail.activity.mixin']
     _sql_constraints = [
     # 1. Unique property name (no two properties with the same name)
     ('unique_property_name', 'unique(name)', 'The property name must be unique.'),

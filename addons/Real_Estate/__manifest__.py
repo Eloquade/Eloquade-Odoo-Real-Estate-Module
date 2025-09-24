@@ -6,7 +6,7 @@
     'author': 'Lawrence',
     'website': 'https://yourcompany.com',
     'category': 'Real Estate',
-    'depends': ['base'],
+    'depends': ['base', 'mail'],
     'data': [
         'views/real_estate_views.xml',
         'views/real_estate_offer_views.xml',
