@@ -69,6 +69,22 @@
         </field>
     </record>
 
+    <!-- Search View -->
+    <record id="view_real_estate_search" model="ir.ui.view">
+        <field name="name">real.estate.search</field>
+        <field name="model">real.estate</field>
+        <field name="arch" type="xml">
+            <search string="Real Estate Search">
+                <field name="name"/>
+                <field name="property_type_id"/>
+                <field name="tag_ids"/>
+                <filter string="Available" name="available" domain="[('state', '=', 'new')]"/>
+                <filter string="Sold" name="sold" domain="[('state', '=', 'sold')]"/>
+                <filter string="Cancelled" name="cancelled" domain="[('state', '=', 'cancelled')]"/>
+            </search>
+        </field>
+    </record>
+
     <!-- list View -->
     <record id="view_real_estate_list" model="ir.ui.view">
         <field name="name">real.estate.list</field>
