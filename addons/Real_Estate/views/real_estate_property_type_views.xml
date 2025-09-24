@@ -19,6 +19,11 @@
         <field name="arch" type="xml">
             <form string="Property Type">
                 <sheet>
+                    <div style="text-align: center;">
+                        <button name="action_open_properties" type="object" string="View Properties" class="oe_stat_button" icon="fa-list">
+                            <field name="property_count" widget="line_count"/>
+                        </button>
+                    </div>
                     <group>
                         <field name="name"/>
                         <field name="active"/>
