@@ -12,7 +12,9 @@
         'views/real_estate_offer_views.xml',
         'views/real_estate_property_type_views.xml',
         'views/real_estate_tag_views.xml',
+        'views/res_users_views.xml',
         'security/ir.model.access.csv',
+
 
     ],
     'images': ['static/description/icon.png'],

@@ -63,6 +63,7 @@ class RealEstate(models.Model):
     ], string='Status', default='draft')
     tag_ids = fields.Many2many('real.estate.tag', string='Tags')
     property_type_id = fields.Many2one('real.estate.property.type', string='Property Type')
+    salesman_id = fields.Many2one('res.users', string='Salesperson', default=lambda self: self.env.user)
 
    
 
